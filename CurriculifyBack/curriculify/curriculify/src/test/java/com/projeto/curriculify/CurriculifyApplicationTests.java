@@ -1,4 +1,4 @@
-package com.curriculify;
+package com.projeto.curriculify;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
