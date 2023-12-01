@@ -1,4 +1,8 @@
+// login.component.ts
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -6,14 +10,41 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  loginForm: FormGroup = this.formBuilder.group({
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', Validators.required]
+  });
 
-  constructor() { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private router: Router,
+  ) { }
 
   ngOnInit(): void {
   }
 
-  login(){
-    console.log("Registrado")
+  login(): void {
+    
+    if (this.loginForm.valid) {
+      const { email, password } = this.loginForm.value;
+      this.authService.login(email, password).subscribe(
+        (response) => {
+          console.log('Resposta do backend:', response);
+        },
+        (error) => {
+          console.error('Erro ao fazer login:', error);
+        }
+      );
+    } else {
+      // Marcar campos como tocados para exibir mensagens de erro
+      Object.keys(this.loginForm.controls).forEach(key => {
+        this.loginForm.get(key)?.markAsTouched();
+      });
+    }
   }
 
+  cadastrar(): void {
+    this.router.navigate(['/cadastro']);
+  }
 }

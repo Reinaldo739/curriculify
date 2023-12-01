@@ -10,6 +10,8 @@ import { MenuComponent } from './pages/menu/menu.component';
 import { CadastroComponent } from './pages/cadastro/cadastro.component';
 import { AppRoutingModule } from './app-routing.module';
 import { RouterModule } from '@angular/router'; // Adicione esta linha
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -24,8 +26,11 @@ import { RouterModule } from '@angular/router'; // Adicione esta linha
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterModule, // Adicione esta linha
-
+    RouterModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

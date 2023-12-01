@@ -1,26 +1,34 @@
 <!-- login.component.html -->
 <div class="container-fluid bg-light pt-5">
-    <div class="row justify-content-center">
-      <div class="col-md-6">
-        <div class="card shadow-lg">
-          <div class="card-header bg-primary text-light">
-            <h4 class="mb-0">Login</h4>
-          </div>
-          <div class="card-body">
-            <form>
-              <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email" placeholder="Seu email" required>
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow-lg">
+        <div class="card-header bg-primary text-light">
+          <h4 class="mb-0">Login</h4>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="loginForm" (ngSubmit)="login()">
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" class="form-control" id="email" placeholder="Seu email" formControlName="email">
+              <div *ngIf="loginForm.get('email')?.hasError('required') && loginForm.get('email')?.touched" class="text-danger">
+                Email é obrigatório.
               </div>
-              <div class="mb-3">
-                <label for="password" class="form-label">Senha</label>
-                <input type="password" class="form-control" id="password" placeholder="Sua senha" required>
+              <div *ngIf="loginForm.get('email')?.hasError('email') && loginForm.get('email')?.touched" class="text-danger">
+                Email inválido.
               </div>
-              <button type="submit" class="btn btn-primary w-100">Entrar</button>
-            </form>
-          </div>
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Senha</label>
+              <input type="password" class="form-control" id="password" placeholder="Sua senha" formControlName="password">
+              <div *ngIf="loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched" class="text-danger">
+                Senha é obrigatória.
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Entrar</button>
+          </form>
         </div>
       </div>
     </div>
   </div>
-  
+</div>
