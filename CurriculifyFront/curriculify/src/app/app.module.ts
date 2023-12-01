@@ -12,6 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { RouterModule } from '@angular/router'; // Adicione esta linha
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-center',
+      preventDuplicates: true,
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]
