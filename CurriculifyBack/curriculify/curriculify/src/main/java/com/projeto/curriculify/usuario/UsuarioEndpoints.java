@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -25,4 +26,29 @@ public class UsuarioEndpoints {
 		
 		return "Hello World!";
 	}
+	
+	@GetMapping("/jpa/logar")
+	@ResponseBody
+	public UsuarioResponseObject LogarUsuario(@RequestBody UsuarioLoginObject loginObject) {
+		Usuario usuarioChecar = usuarioRepository.findByLogin(loginObject.getLogin());
+		
+		if(usuarioChecar.getSenha().equals(loginObject.getSenha())) {
+			return new UsuarioResponseObject(true, usuarioChecar.getId(), usuarioChecar.getEmail(), usuarioChecar.getNome());
+		} else {
+			return new UsuarioResponseObject(false, 0, "", "");
+		}
+	}
+	
+	
+	/*
+	@PostMapping ("/jpa/CadastrarUsuario")
+	public ResponseEntity <Object> CadastrarUsuario (@RequestBody Usuario usuario) {
+		UsuarioRepository usuarioSalvo = usuarioRepository.save(usuario);
+		
+		URI location = ServletUriComponentsBuilder
+				.fromCurrentRequest()
+				.path("/{id}")
+				.buildAndExpand (usuarioSalvo.getId()).toUri();
+		return ResponseEntity.created(location).build();
+	}*/
 }
