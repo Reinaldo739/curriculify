@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="CurriculifyBack/curriculify/curriculify/src/main/java"/>
+	<classpathentry kind="src" path="CurriculifyBack/curriculify/curriculify/src/test/java"/>
+	<classpathentry kind="lib" path="CurriculifyBack/curriculify/curriculify/.mvn/wrapper/maven-wrapper.jar"/>
+	<classpathentry kind="output" path="CurriculifyBack/curriculify/curriculify/target/classes"/>
+</classpath>
