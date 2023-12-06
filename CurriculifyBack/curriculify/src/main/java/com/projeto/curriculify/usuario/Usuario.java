@@ -13,9 +13,24 @@ public class Usuario {
 	private String senha;
 	private String email;
 	private String nome;
+		
+	public Usuario(Integer id, String login, String senha, String email, String nome) {
+		super();
+		this.id = id;
+		this.login = login;
+		this.senha = senha;
+		this.email = email;
+		this.nome = nome;
+	}
 	
-	Usuario () {}
-	
+	public Usuario() {
+		super();
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 	public int getId() {
 		return id;
 	}
