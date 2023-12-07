@@ -1,24 +1,28 @@
 package com.projeto.curriculify.ExpProfissional;
 
 import java.time.LocalDateTime;
+import java.util.Map;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
 public class ExpProfissional {
 	
 	@Id
-	private Integer cdExpProfissional;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+	private Integer idUsuario;
 	private String empresa;
 	private String cargo;
 	private LocalDateTime dataInicio;
     private LocalDateTime dataTermino;
     
-	public ExpProfissional(Integer cdExpProfissional, String empresa, String cargo, LocalDateTime dataInicio,
-			LocalDateTime dataTermino) {
+	public ExpProfissional(Integer id, String empresa, String cargo, LocalDateTime dataInicio, LocalDateTime dataTermino) {
 		super();
-		this.cdExpProfissional = cdExpProfissional;
+		this.id = id;
 		this.empresa = empresa;
 		this.cargo = cargo;
 		this.dataInicio = dataInicio;
@@ -29,12 +33,12 @@ public class ExpProfissional {
 		super();
 	}
 
-	public Integer getCdExpProfissional() {
-		return cdExpProfissional;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setCdExpProfissional(Integer cdExpProfissional) {
-		this.cdExpProfissional = cdExpProfissional;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getEmpresa() {
@@ -68,8 +72,15 @@ public class ExpProfissional {
 	public void setDataTermino(LocalDateTime dataTermino) {
 		this.dataTermino = dataTermino;
 	}
-	
-	
-    
+
+	public Integer getIdUsuario() {
+		return idUsuario;
+	}
+
+	public void setIdUsuario(Integer idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+
+
     
 }
