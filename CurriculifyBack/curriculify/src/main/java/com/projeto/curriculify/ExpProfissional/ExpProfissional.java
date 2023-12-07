@@ -2,8 +2,13 @@ package com.projeto.curriculify.ExpProfissional;
 
 import java.time.LocalDateTime;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Entity
 public class ExpProfissional {
 	
+	@Id
 	private Integer cdExpProfissional;
 	private String empresa;
 	private String cargo;
