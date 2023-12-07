@@ -21,13 +21,7 @@ public class UsuarioEndpoints {
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 	
-	@GetMapping ("/jpa/usuarios")
-	public String PegarUsuarios() {
-		
-		return "Hello World!";
-	}
-	
-	@PostMapping("/jpa/logar")
+	@GetMapping("/jpa/logar")
 	@ResponseBody
 	public UsuarioResponseObject LogarUsuario(@RequestBody UsuarioLoginObject loginObject) {
 		Usuario usuarioChecar = usuarioRepository.findByEmail(loginObject.getEmail());
@@ -36,14 +30,22 @@ public class UsuarioEndpoints {
 				return new UsuarioResponseObject(true, usuarioChecar.getId(), usuarioChecar.getEmail(), usuarioChecar.getNome());
 			}
 		} 
-		
+
 		return new UsuarioResponseObject(false, 0, "", "");
 	}
 	
 	
-	/*
-	@PostMapping ("/jpa/CadastrarUsuario")
-	public ResponseEntity <Object> CadastrarUsuario (@RequestBody Usuario usuario) {
+	@PostMapping ("/jpa/cadastrarUsuario")
+	public ResponseEntity <Object> CadastrarUsuario (@RequestBody UsuarioCreateObject usuario) {
+		String emailDaNovaConta = usuario.getEmail();
+		
+		Usuario usuarioExistente = usuarioRepository.findByEmail(emailDaNovaConta);
+		if(usuarioExistente != null) {
+			// Retorna response object dizendo que usuário já existe
+		}
+		
+		
+		
 		UsuarioRepository usuarioSalvo = usuarioRepository.save(usuario);
 		
 		URI location = ServletUriComponentsBuilder
@@ -51,5 +53,5 @@ public class UsuarioEndpoints {
 				.path("/{id}")
 				.buildAndExpand (usuarioSalvo.getId()).toUri();
 		return ResponseEntity.created(location).build();
-	}*/
+	}
 }
