@@ -27,16 +27,17 @@ public class UsuarioEndpoints {
 		return "Hello World!";
 	}
 	
-	@GetMapping("/jpa/logar")
+	@PostMapping("/jpa/logar")
 	@ResponseBody
 	public UsuarioResponseObject LogarUsuario(@RequestBody UsuarioLoginObject loginObject) {
-		Usuario usuarioChecar = usuarioRepository.findByLogin(loginObject.getLogin());
+		Usuario usuarioChecar = usuarioRepository.findByEmail(loginObject.getEmail());
+		if(usuarioChecar != null) {
+			if(usuarioChecar.getSenha().equals(loginObject.getSenha())) {
+				return new UsuarioResponseObject(true, usuarioChecar.getId(), usuarioChecar.getEmail(), usuarioChecar.getNome());
+			}
+		} 
 		
-		if(usuarioChecar.getSenha().equals(loginObject.getSenha())) {
-			return new UsuarioResponseObject(true, usuarioChecar.getId(), usuarioChecar.getEmail(), usuarioChecar.getNome());
-		} else {
-			return new UsuarioResponseObject(false, 0, "", "");
-		}
+		return new UsuarioResponseObject(false, 0, "", "");
 	}
 	
 	
