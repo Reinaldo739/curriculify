@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.projeto.curriculify.musica.Musica;
+import com.projeto.curriculify.usuario.UsuarioResponseObject;
 
 import java.net.URI;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -23,20 +25,16 @@ public class ExpAcademicaEndpoints {
     private ExpAcademicaRepository ExpAcademicaRepository;
 
     @GetMapping("/jpa/ExpAcademica")
-    public List<ExpAcademica> listarExpAcademicas() {
-    	return ExpAcademicaRepository.findAll();
+    public List<ExpAcademica> listarExpAcademicas(@RequestBody EnvioUsuario idUsuario) {
+    	return ExpAcademicaRepository.findAllByIdUsuario(idUsuario.getIdUsuario());
     }
     
     @PostMapping("/jpa/ExpAcademica")
-    public ResponseEntity<Object> adicionarExpAcademica(@RequestBody ExpAcademica expAcademica) {
-        // Aqui você chama o método do repositório para salvar a experiência acadêmica no banco de dados
-        ExpAcademica novaExpAcademica = ExpAcademicaRepository.save(expAcademica);
-        
-        // Após salvar, você pode retornar um URI para a nova experiência acadêmica criada
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                .buildAndExpand(novaExpAcademica.getCdExpAcademica()).toUri();
-        
-        return ResponseEntity.created(location).build();
+    public ExpAcademicaResponseObject adicionarExpAcademica(@RequestBody ExpAcademicaCriar expAcademica) {
+  
+    	ExpAcademica novaExpAcademica = new ExpAcademica(expAcademica.getIdUsuario(), expAcademica.getInstituicaoEnsino(), expAcademica.getCurso(), expAcademica.getDataInicio(), expAcademica.getDataTermino());
+    	ExpAcademica expAcademicaDentroDoBanco = ExpAcademicaRepository.save(novaExpAcademica);
+        return new ExpAcademicaResponseObject(true, expAcademicaDentroDoBanco.getId());
     }
 }
 
