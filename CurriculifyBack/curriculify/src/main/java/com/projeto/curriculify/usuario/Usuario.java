@@ -9,15 +9,12 @@ public class Usuario {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private String login;
-	private String senha;
 	private String email;
+	private String senha;
 	private String nome;
 		
-	public Usuario(Integer id, String login, String senha, String email, String nome) {
+	public Usuario(String senha, String email, String nome) {
 		super();
-		this.id = id;
-		this.login = login;
 		this.senha = senha;
 		this.email = email;
 		this.nome = nome;
@@ -49,14 +46,6 @@ public class Usuario {
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-
-	public String getLogin() {
-		return login;
-	}
-
-	public void setLogin(String login) {
-		this.login = login;
 	}
 
 	public String getSenha() {

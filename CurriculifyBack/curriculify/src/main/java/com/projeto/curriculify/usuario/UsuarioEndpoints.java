@@ -23,38 +23,43 @@ public class UsuarioEndpoints {
 	
 	@GetMapping("/jpa/logar")
 	@ResponseBody
-	public UsuarioResponseObject LogarUsuario(@RequestBody UsuarioLoginObject loginObject) {
+	public UsuarioLoginResponseObject LogarUsuario(@RequestBody UsuarioLoginRequestObject loginObject) {
 		Usuario usuarioChecar = usuarioRepository.findByEmail(loginObject.getEmail());
 		if(usuarioChecar != null) {
 			if(usuarioChecar.getSenha().equals(loginObject.getSenha())) {
-				return new UsuarioResponseObject(true, usuarioChecar.getId(), usuarioChecar.getEmail(), usuarioChecar.getNome());
+				return new UsuarioLoginResponseObject(true, usuarioChecar.getId(), "SUCESSO");
 			}
 		} 
 
-		return new UsuarioResponseObject(false, 0, "", "");
+		return new UsuarioLoginResponseObject(false, 0, "CREDENCIAL_INVALIDA");
 	}
 	
 	
 	@PostMapping ("/jpa/cadastrarUsuario")
-	public ResponseEntity <Object> CadastrarUsuario (@RequestBody UsuarioCreateObject usuario) {
+	public UsuarioCadastrarResponseObject CadastrarUsuario (@RequestBody UsuarioCadastrarRequestObject usuario) {
 		String emailDaNovaConta = usuario.getEmail();
 		
 		Usuario usuarioExistente = usuarioRepository.findByEmail(emailDaNovaConta);
 		if(usuarioExistente != null) {
-			// Retorna response object dizendo que usuário já existe
+			return new UsuarioCadastrarResponseObject(false, 0, "USUARIO_JA_EXISTE");
+		}
+			
+		Usuario salvarUsuario = new Usuario(usuario.getSenha(), usuario.getEmail(), usuario.getNome());
+		Usuario usuarioSalvo = usuarioRepository.save(salvarUsuario);
+		
+		return new UsuarioCadastrarResponseObject(true, usuarioSalvo.getId(), "SUCESSO");
+	}
+	
+	@GetMapping ("/jpa/dadosUsuario")
+	public UsuarioGetDadosUsuarioResponseObject GetUsuario (@RequestBody UsuarioGetDadosUsuarioRequestBody usuario) {
+		int idUsuario = usuario.getIdUsuario();
+		
+		Usuario usuarioDentroDoBanco = usuarioRepository.findById(idUsuario);
+		if(usuarioDentroDoBanco == null) {
+			return new UsuarioGetDadosUsuarioResponseObject(0, "", "", false, "USUARIO_INEXISTENTE");
+		} else {
+			return new UsuarioGetDadosUsuarioResponseObject(usuarioDentroDoBanco.getId(), usuarioDentroDoBanco.getNome(), usuarioDentroDoBanco.getEmail(), true, "SUCESSO");
 		}
 		
-		
-		
-		
-		
-		
-		UsuarioRepository usuarioSalvo = usuarioRepository.save(usuario);
-		
-		URI location = ServletUriComponentsBuilder
-				.fromCurrentRequest()
-				.path("/{id}")
-				.buildAndExpand (usuarioSalvo.getId()).toUri();
-		return ResponseEntity.created(location).build();
 	}
 }

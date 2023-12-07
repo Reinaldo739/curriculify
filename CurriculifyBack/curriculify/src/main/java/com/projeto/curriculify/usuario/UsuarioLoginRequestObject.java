@@ -1,10 +1,10 @@
 package com.projeto.curriculify.usuario;
 
-public class UsuarioLoginObject {
+public class UsuarioLoginRequestObject {
 	private String email;
 	private String senha;
 	
-	UsuarioLoginObject(){}
+	UsuarioLoginRequestObject(){}
 	
 	public String getEmail() {
 		return email;

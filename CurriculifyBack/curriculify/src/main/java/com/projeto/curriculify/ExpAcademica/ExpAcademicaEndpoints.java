@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.projeto.curriculify.musica.Musica;
-import com.projeto.curriculify.usuario.UsuarioResponseObject;
+import com.projeto.curriculify.usuario.UsuarioLoginResponseObject;
 
 import java.net.URI;
 import java.time.LocalDateTime;

@@ -1,11 +1,11 @@
 package com.projeto.curriculify.usuario;
 
-public class UsuarioCreateObject {
+public class UsuarioCadastrarRequestObject {
 	private String email;
 	private String senha;
 	private String nome;
 	
-	public UsuarioCreateObject(String email, String senha, String nome) {
+	public UsuarioCadastrarRequestObject(String email, String senha, String nome) {
 		super();
 		this.email = email;
 		this.senha = senha;
