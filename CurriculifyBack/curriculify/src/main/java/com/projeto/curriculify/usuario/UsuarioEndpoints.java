@@ -46,6 +46,9 @@ public class UsuarioEndpoints {
 		
 		
 		
+		
+		
+		
 		UsuarioRepository usuarioSalvo = usuarioRepository.save(usuario);
 		
 		URI location = ServletUriComponentsBuilder

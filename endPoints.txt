@@ -1,0 +1,56 @@
+Endpoint POST <ngrokLink>/jpa/logar
+
+Request Body
+{
+	"email": "<login>",
+	"senha": "<senha>"
+}
+
+Response Body
+{
+	"idUsuario": <idUsuario>
+	"sucesso": <true/false>
+	"email": <emailUsuario>
+	"nome": <nomeUsuario>
+}
+
+---
+Endpoint POST <ngrokLink>/jpa/ExpAcademica
+
+Request Body
+{
+	"instituicaoEnsino": "<instituicaoEnsino>",
+	"curso": "<curso>",
+	"dataInicio": "<dataInicio>",
+	"dataTermino": "<dataTermino>"
+}
+
+Response Body // ainda n implementado
+{
+	"sucesso": <true/false>,
+	"id": <id>
+}
+
+--------------------------------------------
+Endpoint GET <ngrokLink>/jpa/ExpAcademica
+
+Request Body
+{
+	"idUsuario": <idUsuario>
+}
+
+Response Body
+[
+    {
+        "cdExpAcademica": 1,
+        "instituicaoEnsino": "Unicuritiba",
+        "curso": "ADS",
+        "dataInicio": "2023-12-06T20:51:01",
+        "dataTermino": "2023-12-06T20:51:01"
+    },
+	
+	...
+]
+
+
+
