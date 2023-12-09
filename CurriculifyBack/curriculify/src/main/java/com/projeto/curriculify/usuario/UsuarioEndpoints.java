@@ -1,29 +1,26 @@
 package com.projeto.curriculify.usuario;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.projeto.curriculify.musica.Musica;
-
-import java.net.URI;
-import java.util.List;
-
+@CrossOrigin(origins = "*")
 @RestController
 public class UsuarioEndpoints {
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 	
-	@GetMapping("/jpa/logar")
-	@ResponseBody
-	public UsuarioLoginResponseObject LogarUsuario(@RequestBody UsuarioLoginRequestObject loginObject) {
+	@PostMapping("/logar")
+	public @ResponseBody UsuarioLoginResponseObject LogarUsuario(@RequestBody UsuarioLoginRequestObject loginObject) {
+		System.out.println(loginObject.getEmail());
+		System.out.println(loginObject.getSenha());
+		
+		
 		Usuario usuarioChecar = usuarioRepository.findByEmail(loginObject.getEmail());
 		if(usuarioChecar != null) {
 			if(usuarioChecar.getSenha().equals(loginObject.getSenha())) {
@@ -50,10 +47,8 @@ public class UsuarioEndpoints {
 		return new UsuarioCadastrarResponseObject(true, usuarioSalvo.getId(), "SUCESSO");
 	}
 	
-	@GetMapping ("/jpa/dadosUsuario")
-	public UsuarioGetDadosUsuarioResponseObject GetUsuario (@RequestBody UsuarioGetDadosUsuarioRequestBody usuario) {
-		int idUsuario = usuario.getIdUsuario();
-		
+	@GetMapping ("/dadosUsuario")
+	public UsuarioGetDadosUsuarioResponseObject GetUsuario (@RequestParam(name = "idUsuario", required = true) int idUsuario) {		
 		Usuario usuarioDentroDoBanco = usuarioRepository.findById(idUsuario);
 		if(usuarioDentroDoBanco == null) {
 			return new UsuarioGetDadosUsuarioResponseObject(0, "", "", false, "USUARIO_INEXISTENTE");

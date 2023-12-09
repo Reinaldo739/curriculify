@@ -1,5 +1,7 @@
 package com.projeto.curriculify.usuario;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
+
 public class UsuarioLoginResponseObject {
 	public int idUsuario;
 	public boolean sucesso;
