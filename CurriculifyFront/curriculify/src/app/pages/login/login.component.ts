@@ -27,7 +27,6 @@ export class LoginComponent implements OnInit {
   }
 
   login(): void {
-    this.toastr.error('Tentativa de login', 'Falha na requisição');
     if (this.loginForm.valid) {
       const { email, password } = this.loginForm.value;
       this.authService.login(email, password).subscribe(
@@ -39,7 +38,6 @@ export class LoginComponent implements OnInit {
         }
       );
     } else {
-      // Marcar campos como tocados para exibir mensagens de erro
       Object.keys(this.loginForm.controls).forEach(key => {
         this.loginForm.get(key)?.markAsTouched();
       });

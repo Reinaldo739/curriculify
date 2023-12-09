@@ -8,16 +8,20 @@ import { Observable } from 'rxjs';
 export class AuthService {
 
   constructor(private http: HttpClient) { }
-  private apiUrl = 'http://localhost:8080/';
+  private apiUrl = 'https://d742-2001-1284-f508-288d-99ec-660f-8297-234.ngrok.io/';
   private readonly STORAGE_KEY = 'user_authenticated';
-  
+
   login(email: string, password: string): Observable<any> {
     const body = { email, password };
-    console.log(body)
 
-    return this.http.post(this.apiUrl + 'jpa/usuarios/login', body);
+    return this.http.post(this.apiUrl + 'jpa/logar', body);
   }
 
+  cadastrar(nome: string, email: string, senha: string): Observable<any> {
+    const body = { nome, email, senha };
+
+    return this.http.post(this.apiUrl + 'jpa/cadastrarUsuario', body);
+  }
 
   logout(): void {
     localStorage.removeItem(this.STORAGE_KEY);
