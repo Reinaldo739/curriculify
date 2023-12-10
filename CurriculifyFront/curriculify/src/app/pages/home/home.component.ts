@@ -63,37 +63,46 @@ export class HomeComponent implements OnInit, AfterViewInit {
 -----------------------------------------------------------------------------------------------------------------------`;
         html+=dados;
 
-
-        var expAcademicas = "<h2>Experiências Acadêmicas</h2>\n"; 
-        this.expAcademicas.forEach(value => {
-            var dataInicio = value['dataInicio'];''
-            var dataTermino = value['dataTermino'];
-            var instituicaoEnsino = value['instituicaoEnsino'];
-            var curso = value['curso'];
-
-            expAcademicas += `<div style="width: 100%; margin-bottom: 10px;">
-    <div>${dataInicio} - ${dataTermino}</div>
-    <div>${instituicaoEnsino} - ${curso}</div>
-</div>
+        var expAcademicas = "";
+        if(this.expAcademicas.length !== 0){
+            expAcademicas = "<h2>Experiência Acadêmica</h2>\n"; 
+            this.expAcademicas.forEach(value => {
+                var dataInicio = value['dataInicio'];''
+                var dataTermino = value['dataTermino'];
+                var instituicaoEnsino = value['instituicaoEnsino'];
+                var curso = value['curso'];
+    
+                expAcademicas += `<div style="width: 100%; margin-bottom: 10px;">
+        <div>${dataInicio} - ${dataTermino}</div>
+        <div>${instituicaoEnsino} - ${curso}</div>
+    </div>
 `;
-        });
+            });
+        }
+
+        var expProfissionais = "";
+        if(this.expProfissionais.length !== 0){
+            expProfissionais = "<h2>Experiência Profissional</h2>\n"; 
+            this.expProfissionais.forEach(value => {
+                var dataInicio = value['dataInicio'];''
+                var dataTermino = value['dataTermino'];
+                var empresa = value['empresa'];
+                var cargo = value['cargo'];
+    
+                expProfissionais += `<div style="width: 100%; margin-bottom: 10px;">
+        <div>${dataInicio} - ${dataTermino}</div>
+        <div>${empresa} - ${cargo}</div>
+    </div>
+`;
+            });
+        }
+
         html += expAcademicas;
-
-        var expProfissionais = "<h2>Experiências Profissionais</h2>\n"; 
-        this.expProfissionais.forEach(value => {
-            var dataInicio = value['dataInicio'];''
-            var dataTermino = value['dataTermino'];
-            var empresa = value['empresa'];
-            var cargo = value['cargo'];
-
-            expProfissionais += `<div style="width: 100%; margin-bottom: 10px;">
-    <div>${dataInicio} - ${dataTermino}</div>
-    <div>${empresa} - ${cargo}</div>
-</div>
-`;
-        });
         html += expProfissionais;
 
+        if(expAcademicas == "" && expProfissionais == ""){
+            html += "<h3>Sem experiência</h3>";
+        }
 
         html += "</body>";
 

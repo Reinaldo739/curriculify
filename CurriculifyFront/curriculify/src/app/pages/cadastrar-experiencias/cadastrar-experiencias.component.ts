@@ -50,6 +50,7 @@ export class CadastrarExperienciasComponent implements OnInit {
                     console.log(response);
                     if(response.sucesso){
                         this.toastr.success('Experiência cadastrada!', 'Sucesso');
+                        this.router.navigate(['/home', {idUsuario: this.idUsuario}]);
                     } else {
                         this.toastr.error('Erro ao cadastrar a experiência', 'Erro');
                     }

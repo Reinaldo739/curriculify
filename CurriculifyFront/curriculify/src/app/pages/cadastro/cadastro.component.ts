@@ -25,34 +25,46 @@ export class CadastroComponent implements OnInit {
         private toastr: ToastrService
         ) { }
         
-        ngOnInit(): void {
-        }
+    ngOnInit(): void {
+    }
         
-        cadastrar(): void {
-            if (this.cadastroForm.valid) {
-                const { nome, email, senha } = this.cadastroForm.value;
-                
-                this.authService.cadastrar(nome, email, senha).subscribe(
-                    (response) => {
-                        console.log('Resposta do backend:', response);
+    cadastrar(): void {
+        if (this.cadastroForm.valid) {
+            const { nome, email, senha } = this.cadastroForm.value;
+            
+            this.authService.cadastrar(nome, email, senha).subscribe(
+                (response) => {
+                    console.log('Resposta do backend:', response);
+                    
+                    if(response.sucesso){
                         this.toastr.success('Cadastro realizado com sucesso!', 'Sucesso');
                         this.router.navigate(['/login']);
-                    },
-                    (error) => {
-                        console.error('Erro ao cadastrar:', error);
-                        this.toastr.error('Erro ao cadastrar. Tente novamente mais tarde.', 'Falha no cadastro');
+                    } else {
+                        switch(response.msg){
+                            case 'USUARIO_JA_EXISTE':
+                                this.toastr.error('Esse email já é cadastrado!', 'Erro');
+                                break;
+                            default:
+                                this.toastr.error('Erro desconhecido!', 'Erro');
+                                break;
+                        }
                     }
-                    );
-                } else {
-                    this.cadastroForm.markAllAsTouched();
+                },
+                (error) => {
+                    console.error('Erro ao cadastrar:', error);
+                    this.toastr.error('Erro ao cadastrar. Tente novamente mais tarde.', 'Falha no cadastro');
                 }
-            }
-            
-            confirmarSenhaValidator(formGroup: FormGroup) {
-                const senha = formGroup.get('senha')?.value;
-                const confirmarSenha = formGroup.get('confirmarSenha')?.value;
-                
-                return senha === confirmarSenha ? null : { senhaMatch: true };
-            }
+            );
+        } else {
+            this.cadastroForm.markAllAsTouched();
         }
+    }
+        
+    confirmarSenhaValidator(formGroup: FormGroup) {
+        const senha = formGroup.get('senha')?.value;
+        const confirmarSenha = formGroup.get('confirmarSenha')?.value;
+        
+        return senha === confirmarSenha ? null : { senhaMatch: true };
+    }
+}
         
