@@ -1,49 +1,49 @@
 <!-- cadastro.component.html -->
 <div class="container-fluid bg-light pt-5">
-  <div class="row justify-content-center">
-    <div class="col-md-6">
-      <div class="card shadow-lg">
-        <div class="card-body">
-          <h2 class="text-center mb-4 text-primary">Cadastro de Usuário</h2>
-          <form [formGroup]="cadastroForm" (ngSubmit)="cadastrar()">
-            <div class="mb-3">
-              <label for="nome" class="form-label">Nome</label>
-              <input type="text" class="form-control" id="nome" placeholder="Digite seu nome" formControlName="nome">
-              <div *ngIf="cadastroForm.get('nome')?.hasError('required') && cadastroForm.get('nome')?.touched" class="text-danger">
-                Nome é obrigatório.
-              </div>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg">
+                <div class="card-body">
+                    <h2 class="text-center mb-4 text-primary">Cadastro de Usuário</h2>
+                    <form [formGroup]="cadastroForm" (ngSubmit)="cadastrar()">
+                        <div class="mb-3">
+                            <label for="nome" class="form-label">Nome</label>
+                            <input type="text" class="form-control" id="nome" placeholder="Digite seu nome" formControlName="nome">
+                            <div *ngIf="cadastroForm.get('nome')?.hasError('required') && cadastroForm.get('nome')?.touched" class="text-danger">
+                                Nome é obrigatório.
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" placeholder="Digite seu email" formControlName="email">
+                            <div *ngIf="cadastroForm.get('email')?.hasError('required') && cadastroForm.get('email')?.touched" class="text-danger">
+                                Email é obrigatório.
+                            </div>
+                            <div *ngIf="cadastroForm.get('email')?.hasError('email') && cadastroForm.get('email')?.touched" class="text-danger">
+                                Email inválido.
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="senha" class="form-label">Senha</label>
+                            <input type="password" class="form-control" id="senha" placeholder="Digite sua senha" formControlName="senha">
+                            <div *ngIf="cadastroForm.get('senha')?.hasError('required') && cadastroForm.get('senha')?.touched" class="text-danger">
+                                Senha é obrigatória.
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="confirmarSenha" class="form-label">Confirmar Senha</label>
+                            <input type="password" class="form-control" id="confirmarSenha" placeholder="Confirme sua senha" formControlName="confirmarSenha">
+                            <div *ngIf="cadastroForm.get('confirmarSenha')?.hasError('required') && cadastroForm.get('confirmarSenha')?.touched" class="text-danger">
+                                Confirmação de senha é obrigatória.
+                            </div>
+                            <div *ngIf="cadastroForm.hasError('senhaMatch') && cadastroForm.get('confirmarSenha')?.touched" class="text-danger">
+                                Senhas não coincidem.
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Cadastrar</button>
+                    </form>
+                </div>
             </div>
-            <div class="mb-3">
-              <label for="email" class="form-label">Email</label>
-              <input type="email" class="form-control" id="email" placeholder="Digite seu email" formControlName="email">
-              <div *ngIf="cadastroForm.get('email')?.hasError('required') && cadastroForm.get('email')?.touched" class="text-danger">
-                Email é obrigatório.
-              </div>
-              <div *ngIf="cadastroForm.get('email')?.hasError('email') && cadastroForm.get('email')?.touched" class="text-danger">
-                Email inválido.
-              </div>
-            </div>
-            <div class="mb-3">
-              <label for="senha" class="form-label">Senha</label>
-              <input type="password" class="form-control" id="senha" placeholder="Digite sua senha" formControlName="senha">
-              <div *ngIf="cadastroForm.get('senha')?.hasError('required') && cadastroForm.get('senha')?.touched" class="text-danger">
-                Senha é obrigatória.
-              </div>
-            </div>
-            <div class="mb-3">
-              <label for="confirmarSenha" class="form-label">Confirmar Senha</label>
-              <input type="password" class="form-control" id="confirmarSenha" placeholder="Confirme sua senha" formControlName="confirmarSenha">
-              <div *ngIf="cadastroForm.get('confirmarSenha')?.hasError('required') && cadastroForm.get('confirmarSenha')?.touched" class="text-danger">
-                Confirmação de senha é obrigatória.
-              </div>
-              <div *ngIf="cadastroForm.hasError('senhaMatch') && cadastroForm.get('confirmarSenha')?.touched" class="text-danger">
-                Senhas não coincidem.
-              </div>
-            </div>
-            <button type="submit" class="btn btn-primary w-100">Cadastrar</button>
-          </form>
         </div>
-      </div>
     </div>
-  </div>
 </div>

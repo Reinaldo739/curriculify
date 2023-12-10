@@ -6,6 +6,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { CadastroComponent } from './pages/cadastro/cadastro.component';
 import { SobreComponent } from './pages/sobre/sobre.component';
 import { LoginGuard } from './pages/guards/login.guard';
+import { CadastrarExperienciasComponent } from './pages/cadastrar-experiencias/cadastrar-experiencias.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [LoginGuard] },
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'cadastro', component: CadastroComponent },
   { path: 'sobre', component: SobreComponent },
+  { path: 'cadastrar-experiencias', component: CadastrarExperienciasComponent },
 ];
 
 @NgModule({

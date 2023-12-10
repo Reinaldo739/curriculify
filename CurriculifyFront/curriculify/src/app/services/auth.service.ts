@@ -55,6 +55,15 @@ export class AuthService {
         return this.http.get(this.apiUrl + 'jpa/ExpProfissional', {params: params});
     }
 
+    CriarExpUsuario(idUsuario: number, tipoExp: string, dados: any): Observable<any>{
+        dados['idUsuario'] = idUsuario;
+        if(tipoExp == "academica"){
+            return this.http.post(this.apiUrl + 'jpa/ExpAcademica', dados);
+        } else {
+            return this.http.post(this.apiUrl + 'jpa/ExpProfissional', dados);
+        }  
+    }
+
     // Gerar Curriculo ------------------------------------------------------------------
 
     GerarCurriculo(idUsuario: number, html: string): Observable<any> {

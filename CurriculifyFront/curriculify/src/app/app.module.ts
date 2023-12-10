@@ -8,6 +8,7 @@ import { CurriculoComponent } from './pages/curriculo/curriculo.component';
 import { SobreComponent } from './pages/sobre/sobre.component';
 import { MenuComponent } from './pages/menu/menu.component';
 import { CadastroComponent } from './pages/cadastro/cadastro.component';
+import { CadastrarExperienciasComponent } from './pages/cadastrar-experiencias/cadastrar-experiencias.component';
 import { AppRoutingModule } from './app-routing.module';
 import { RouterModule } from '@angular/router'; // Adicione esta linha
 import { HttpClient, HttpClientModule } from '@angular/common/http';
@@ -23,7 +24,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CurriculoComponent,
     SobreComponent,
     MenuComponent,
-    CadastroComponent
+    CadastroComponent,
+    CadastrarExperienciasComponent
   ],
   imports: [
     BrowserModule,

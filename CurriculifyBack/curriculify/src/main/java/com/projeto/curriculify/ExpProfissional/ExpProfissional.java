@@ -20,9 +20,9 @@ public class ExpProfissional {
 	private LocalDateTime dataInicio;
     private LocalDateTime dataTermino;
     
-	public ExpProfissional(Integer id, String empresa, String cargo, LocalDateTime dataInicio, LocalDateTime dataTermino) {
+	public ExpProfissional(Integer idUsuario, String empresa, String cargo, LocalDateTime dataInicio, LocalDateTime dataTermino) {
 		super();
-		this.id = id;
+		this.idUsuario = idUsuario;
 		this.empresa = empresa;
 		this.cargo = cargo;
 		this.dataInicio = dataInicio;

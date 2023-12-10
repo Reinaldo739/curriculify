@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit  } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-home',
@@ -14,7 +15,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
     expProfissionais = [];
 
     constructor(private authService: AuthService,
-                private route: ActivatedRoute) { }
+                private route: ActivatedRoute,
+                private router: Router) { }
     
     ngAfterViewInit(): void {
         
@@ -52,8 +54,54 @@ export class HomeComponent implements OnInit, AfterViewInit {
         );
     }
 
+    gerarHtmlCurriculo(): string {
+        var html = "<body>";
+
+        var dados = `<h1>Dados Cadastrais</h1>
+<p>Nome: ${this.usuarioNome}</p>
+<p>Email:${this.usuarioEmail}</p>
+-----------------------------------------------------------------------------------------------------------------------`;
+        html+=dados;
+
+
+        var expAcademicas = "<h2>Experiências Acadêmicas</h2>\n"; 
+        this.expAcademicas.forEach(value => {
+            var dataInicio = value['dataInicio'];''
+            var dataTermino = value['dataTermino'];
+            var instituicaoEnsino = value['instituicaoEnsino'];
+            var curso = value['curso'];
+
+            expAcademicas += `<div style="width: 100%; margin-bottom: 10px;">
+    <div>${dataInicio} - ${dataTermino}</div>
+    <div>${instituicaoEnsino} - ${curso}</div>
+</div>
+`;
+        });
+        html += expAcademicas;
+
+        var expProfissionais = "<h2>Experiências Profissionais</h2>\n"; 
+        this.expProfissionais.forEach(value => {
+            var dataInicio = value['dataInicio'];''
+            var dataTermino = value['dataTermino'];
+            var empresa = value['empresa'];
+            var cargo = value['cargo'];
+
+            expProfissionais += `<div style="width: 100%; margin-bottom: 10px;">
+    <div>${dataInicio} - ${dataTermino}</div>
+    <div>${empresa} - ${cargo}</div>
+</div>
+`;
+        });
+        html += expProfissionais;
+
+
+        html += "</body>";
+
+        return html;
+    }
+
     onClickBtnGerarCurriculo() {
-        this.authService.GerarCurriculo(this.route.snapshot.params['idUsuario'], "<p>Hello World!</p>").subscribe(
+        this.authService.GerarCurriculo(this.route.snapshot.params['idUsuario'], this.gerarHtmlCurriculo()).subscribe(
             (response: Blob) => {
                 // Create a Blob from the response
                 const blob = new Blob([response], { type: 'application/pdf' });
@@ -74,5 +122,13 @@ export class HomeComponent implements OnInit, AfterViewInit {
                 console.log(error);
             }
         );
+    }
+
+    navegarNovaExperienciaAcademica(){
+        this.router.navigate(['/cadastrar-experiencias', {idUsuario: this.route.snapshot.params['idUsuario'], tipo: "academica"}]);
+    }
+
+    navegarNovaExperienciaProfissional(){
+        this.router.navigate(['/cadastrar-experiencias', {idUsuario: this.route.snapshot.params['idUsuario'], tipo: "profissional"}]);
     }
 }

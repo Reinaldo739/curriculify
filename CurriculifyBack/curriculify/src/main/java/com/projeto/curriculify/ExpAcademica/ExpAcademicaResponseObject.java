@@ -1,6 +1,5 @@
 package com.projeto.curriculify.ExpAcademica;
 
-import java.time.LocalDateTime;
 
 public class ExpAcademicaResponseObject {
 	public boolean sucesso;
