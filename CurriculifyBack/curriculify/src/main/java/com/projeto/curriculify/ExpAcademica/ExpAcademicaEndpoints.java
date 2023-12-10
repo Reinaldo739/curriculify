@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -16,6 +17,7 @@ import java.net.URI;
 import java.time.LocalDateTime;
 import java.util.List;
 
+@CrossOrigin(origins = "*")
 @RestController
 public class ExpAcademicaEndpoints {
 
@@ -23,8 +25,8 @@ public class ExpAcademicaEndpoints {
     private ExpAcademicaRepository ExpAcademicaRepository;
 
     @GetMapping("/jpa/ExpAcademica")
-    public List<ExpAcademica> listarExpAcademicas(@RequestBody EnvioUsuario idUsuario) {
-    	return ExpAcademicaRepository.findAllByIdUsuario(idUsuario.getIdUsuario());
+    public List<ExpAcademica> listarExpAcademicas(@RequestParam(name = "idUsuario", required = true) int idUsuario) {
+    	return ExpAcademicaRepository.findAllByIdUsuario(idUsuario);
     }
     
     @PostMapping("/jpa/ExpAcademica")

@@ -1,34 +1,67 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class AuthService {
+    
+    constructor(private http: HttpClient) { }
+    private apiUrl = 'http://localhost:8080/';
+    private readonly STORAGE_KEY = 'user_authenticated';
+    
+    // Usuario ------------------------------------------------------------------
+    login(email: string, senha: string): Observable<any> {
+        const body = { email, senha };
+        return this.http.post(this.apiUrl + 'logar', body);
+    }
+    
+    cadastrar(nome: string, email: string, senha: string): Observable<any> {
+        const body = { nome, email, senha };
+        
+        return this.http.post(this.apiUrl + 'jpa/cadastrarUsuario', body);
+    }
+    
+    logout(): void {
+        localStorage.removeItem(this.STORAGE_KEY);
+    }
+    
+    isLoggedIn(): boolean {
+        return localStorage.getItem(this.STORAGE_KEY) === 'true';
+    }
 
-  constructor(private http: HttpClient) { }
-  private apiUrl = 'https://d742-2001-1284-f508-288d-99ec-660f-8297-234.ngrok.io/';
-  private readonly STORAGE_KEY = 'user_authenticated';
+    PegarDadosUsuario(idUsuario: number): Observable<any> {
+        let params = new HttpParams()
+            .set('idUsuario', idUsuario);
 
-  login(email: string, password: string): Observable<any> {
-    const body = { email, password };
+        return this.http.get(this.apiUrl + 'dadosUsuario', {params: params});
+    }
 
-    return this.http.post(this.apiUrl + 'jpa/logar', body);
-  }
+    // ExpAcademica ------------------------------------------------------------------
+    PegarExpAcademicasUsuario(idUsuario: number): Observable<any> {
+        let params = new HttpParams()
+            .set('idUsuario', idUsuario);
 
-  cadastrar(nome: string, email: string, senha: string): Observable<any> {
-    const body = { nome, email, senha };
+        return this.http.get(this.apiUrl + 'jpa/ExpAcademica', {params: params});
+    }
 
-    return this.http.post(this.apiUrl + 'jpa/cadastrarUsuario', body);
-  }
+    // ExpProfissional ------------------------------------------------------------------
 
-  logout(): void {
-    localStorage.removeItem(this.STORAGE_KEY);
-  }
+    PegarExpProfissionaisUsuario(idUsuario: number): Observable<any> {
+        let params = new HttpParams()
+            .set('idUsuario', idUsuario);
 
-  isLoggedIn(): boolean {
-    return localStorage.getItem(this.STORAGE_KEY) === 'true';
-  }
+        return this.http.get(this.apiUrl + 'jpa/ExpProfissional', {params: params});
+    }
 
+    // Gerar Curriculo ------------------------------------------------------------------
+
+    GerarCurriculo(idUsuario: number, html: string): Observable<any> {
+        const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+        let params = new HttpParams()
+            .set('idUsuario', idUsuario);
+
+        return this.http.post(this.apiUrl + 'jpa/criarCurriculo', html, {params: params, headers, responseType: 'blob'},);
+    }    
 }

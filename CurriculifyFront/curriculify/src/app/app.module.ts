@@ -13,6 +13,7 @@ import { RouterModule } from '@angular/router'; // Adicione esta linha
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { ToastrModule } from 'ngx-toastr';
       positionClass: 'toast-bottom-center',
       preventDuplicates: true,
     }),
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

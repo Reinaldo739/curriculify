@@ -33,13 +33,14 @@ import java.io.IOException;
 import java.io.InputStream;
 
 @RestController
+@CrossOrigin(origins = "*")
 public class CurriculoEndpoints {
 	
-	@GetMapping ("/jpa/criarCurriculo")
-	public ResponseEntity<InputStreamResource> CriarCurriculoPdf(@RequestBody String html, @RequestParam(name = "id", required = false) String id) throws FileNotFoundException, DocumentException {
+	@PostMapping ("/jpa/criarCurriculo")
+	public ResponseEntity<InputStreamResource> CriarCurriculoPdf(@RequestBody String html, @RequestParam(name = "idUsuario", required = false) String idUsuario) throws FileNotFoundException, DocumentException {
 		String userPrefix = "unknown";
-		if (id != null) {
-			userPrefix = id;
+		if (idUsuario != null) {
+			userPrefix = idUsuario;
 		}
 		
 		String filePath = "curriculos/" + userPrefix + "-curriculo.pdf";   

@@ -24,7 +24,6 @@ public class TesteExpAcademica extends TestCase {
 		assertEquals(curso, ExpEncontrada.getCurso());
 		assertEquals(LocalDateTime.now(), ExpEncontrada.getDataInicio());
 		assertEquals(LocalDateTime.now(), ExpEncontrada.getDataTermino());
-		
 	}
 
 }
