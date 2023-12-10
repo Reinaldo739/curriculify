@@ -4,38 +4,38 @@
             <div *ngIf="tipoExperiencia === 'academica'; else notAcademicaBlock">
                 <h2>Experiência Acadêmica</h2>
                 <div class="mb-3">
-                    <label for="instituicaoEnsino" class="form-label">Instituição de Ensino</label>
+                    <label for="instituicaoEnsino" class="form-label"><b>*</b>Instituição de Ensino</label>
                     <input type="text" formControlName="instituicaoEnsino" class="form-control" id="instituicaoEnsino" placeholder="Insira a instituição..." />
                 </div>
                 <div class="mb-3">
-                    <label for="curso"  class="form-label">Curso</label>
+                    <label for="curso"  class="form-label"><b>*</b>Curso</label>
                     <input type="text" formControlName="curso" class="form-control" id="curso" placeholder="Insira o curso..." />
                 </div>
                 <div class="mb-3">
-                    <label for="dataInicio"  class="form-label">Data de Ínicio</label>
+                    <label for="dataInicio"  class="form-label"><b>*</b>Data de Ínicio (dia/mes/ano)</label>
                     <input type="text" formControlName="dataInicio" class="form-control" id="dataInicio" placeholder="Insira a data de ínicio..." />
                 </div>
                 <div class="mb-3">
-                    <label for="dataTermino" class="form-label">Data de Conclusão</label>
+                    <label for="dataTermino" class="form-label"><b>*</b>Data de Conclusão (dia/mes/ano)</label>
                     <input type="text" class="form-control" formControlName="dataTermino" id="dataTermino" placeholder="Insira a data de conclusão..." />
                 </div>
             </div>
             <ng-template #notAcademicaBlock>
                 <h2>Experiência Profissional</h2>
                 <div class="mb-3">
-                    <label for="empresa"  class="form-label">Empresa</label>
+                    <label for="empresa"  class="form-label"><b>*</b>Empresa</label>
                     <input type="text" formControlName="empresa" class="form-control" id="empresa" placeholder="Insira a data de empresa..." />
                 </div>
                 <div class="mb-3">
-                    <label for="cargo"  class="form-label">Cargo</label>
+                    <label for="cargo"  class="form-label"><b>*</b>Cargo</label>
                     <input type="text" formControlName="cargo" class="form-control" id="cargo" placeholder="Insira o cargo..." />
                 </div>
                 <div class="mb-3">
-                    <label for="dataInicio"  class="form-label">Data de Ínicio</label>
+                    <label for="dataInicio"  class="form-label"><b>*</b>Data de Ínicio (dia/mes/ano)</label>
                     <input type="text" formControlName="dataInicio" class="form-control" id="dataInicio" placeholder="Insira a data de ínicio..." />
                 </div>
                 <div class="mb-3">
-                    <label for="dataTermino"  class="form-label">Data de Conclusão</label>
+                    <label for="dataTermino"  class="form-label"><b>*</b>Data de Conclusão (dia/mes/ano)</label>
                     <input type="text" formControlName="dataTermino" class="form-control" id="dataTermino" placeholder="Insira a data de conclusão..." />
                 </div>
             </ng-template>

@@ -11,8 +11,8 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit, AfterViewInit {
     usuarioEmail: String = "";
     usuarioNome: String = "";
-    expAcademicas = [];
-    expProfissionais = [];
+    expAcademicas: any[] = [];
+    expProfissionais: any[] = [];
 
     constructor(private authService: AuthService,
                 private route: ActivatedRoute,
@@ -38,6 +38,11 @@ export class HomeComponent implements OnInit, AfterViewInit {
         this.authService.PegarExpAcademicasUsuario(idUsuario).subscribe(
             (response) => {
                 this.expAcademicas = response;
+
+                for (let key in this.expAcademicas) {
+                    this.expAcademicas[key].dataInicio = this.converterDataUSparaBR(this.expAcademicas[key].dataInicio);
+                    this.expAcademicas[key].dataTermino = this.converterDataUSparaBR(this.expAcademicas[key].dataTermino);
+                }
             },
             (error) => {
                 console.log(error);
@@ -47,11 +52,36 @@ export class HomeComponent implements OnInit, AfterViewInit {
         this.authService.PegarExpProfissionaisUsuario(idUsuario).subscribe(
             (response) => {
                 this.expProfissionais = response;
+
+                for (let key in this.expProfissionais) {
+                    this.expProfissionais[key].dataInicio = this.converterDataUSparaBR(this.expProfissionais[key].dataInicio);
+                    this.expProfissionais[key].dataTermino = this.converterDataUSparaBR(this.expProfissionais[key].dataTermino);
+                }
             },
             (error) => {
                 console.log(error);
             }
         );
+    }
+
+    converterDataUSparaBR(inputDate: string): string | null {
+        const isoDatePattern = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$/;
+        
+        if (!isoDatePattern.test(inputDate)) {
+            console.error('Invalid date format');
+            return null;
+        }
+        
+        const isoDate = new Date(inputDate);
+        
+        // Use a helper function to ensure two-digit formatting
+        const formatTwoDigits = (value: number) => value.toString().padStart(2, '0');
+        
+        const day = formatTwoDigits(isoDate.getDate());
+        const month = formatTwoDigits(isoDate.getMonth() + 1); // Months are zero-based
+        const year = isoDate.getFullYear();
+        
+        return `${day}/${month}/${year}`;
     }
 
     gerarHtmlCurriculo(): string {
@@ -67,7 +97,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
         if(this.expAcademicas.length !== 0){
             expAcademicas = "<h2>Experiência Acadêmica</h2>\n"; 
             this.expAcademicas.forEach(value => {
-                var dataInicio = value['dataInicio'];''
+                var dataInicio = value['dataInicio'];
                 var dataTermino = value['dataTermino'];
                 var instituicaoEnsino = value['instituicaoEnsino'];
                 var curso = value['curso'];
@@ -84,7 +114,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
         if(this.expProfissionais.length !== 0){
             expProfissionais = "<h2>Experiência Profissional</h2>\n"; 
             this.expProfissionais.forEach(value => {
-                var dataInicio = value['dataInicio'];''
+                var dataInicio = value['dataInicio'];
                 var dataTermino = value['dataTermino'];
                 var empresa = value['empresa'];
                 var cargo = value['cargo'];
