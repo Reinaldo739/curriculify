@@ -1,0 +1,267 @@
+{
+	"info": {
+		"_postman_id": "b0e98ad1-6f14-4e48-827f-2a4c08f1ba7f",
+		"name": "CURRICULIFY_USUARIO",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Endpoints Usuario",
+			"item": [
+				{
+					"name": "Endpoint Logar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"tango@hotmail.com\",\r\n    \"senha\": \"helloWorld\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{dominioCurriculify}}/logar",
+							"host": [
+								"{{dominioCurriculify}}"
+							],
+							"path": [
+								"logar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Endpoint Puxar dados do usuario",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{dominioCurriculify}}/dadosUsuario?idUsuario=5",
+							"host": [
+								"{{dominioCurriculify}}"
+							],
+							"path": [
+								"dadosUsuario"
+							],
+							"query": [
+								{
+									"key": "idUsuario",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Endpoint cadastrarUsuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"novoemail@novoemail.com\",\r\n    \"senha\": \"123\",\r\n    \"nome\": \"Ronaldinho\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{dominioCurriculify}}/jpa/cadastrarUsuario",
+							"host": [
+								"{{dominioCurriculify}}"
+							],
+							"path": [
+								"jpa",
+								"cadastrarUsuario"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Endpoints ExpAcademica",
+			"item": [
+				{
+					"name": "Puxar ExpAcademicas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{dominioCurriculify}}/jpa/ExpAcademica?idUsuario=5",
+							"host": [
+								"{{dominioCurriculify}}"
+							],
+							"path": [
+								"jpa",
+								"ExpAcademica"
+							],
+							"query": [
+								{
+									"key": "idUsuario",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar ExpAcademica",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idUsuario\": 5,\r\n    \"curso\": \"Novo Curso na Quebrada\",\r\n    \"instituicaoEnsino\": \"MASSACHUTES\",\r\n    \"dataInicio\": \"2023-09-12T00:00:00\",\r\n    \"dataTermino\": \"2023-09-12T00:00:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{dominioCurriculify}}/jpa/ExpAcademica",
+							"host": [
+								"{{dominioCurriculify}}"
+							],
+							"path": [
+								"jpa",
+								"ExpAcademica"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Endpoints ExpProfissional",
+			"item": [
+				{
+					"name": "Puxar ExpProfissional",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{dominioCurriculify}}/jpa/ExpProfissional?idUsuario=5",
+							"host": [
+								"{{dominioCurriculify}}"
+							],
+							"path": [
+								"jpa",
+								"ExpProfissional"
+							],
+							"query": [
+								{
+									"key": "idUsuario",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar ExpProfissional",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idUsuario\": 5,\r\n    \"empresa\": \"Liga of Legends\",\r\n    \"cargo\": \"Mestre das Lendass\",\r\n    \"dataInicio\": \"2023-09-12T00:00:00\",\r\n    \"dataTermino\": \"2023-09-12T00:00:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{dominioCurriculify}}/jpa/ExpProfissional",
+							"host": [
+								"{{dominioCurriculify}}"
+							],
+							"path": [
+								"jpa",
+								"ExpProfissional"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Endpoints CriarCurriculo",
+			"item": [
+				{
+					"name": "Criar Curriculo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "<body>\r\n    <h1>Experiências Acadêmicas</h1>\r\n    <div style=\"width: 100%; margin-bottom: 10px;\">\r\n        <div>aaa - aaa</div>\r\n        <div>aaa - aaa</div>\r\n    </div>\r\n    <div style=\"width: 100%; margin-bottom: 10px;\">\r\n        <div>aaa - aaa</div>\r\n        <div>aaa - aaa</div>\r\n    </div>\r\n    <div style=\"width: 100%; margin-bottom: 10px;\">\r\n        <div>aaa - aaa</div>\r\n        <div>aaa - aaa</div>\r\n    </div>\r\n</body>\r\n\r\n\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "html"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{dominioCurriculify}}/jpa/criarCurriculo?idUsuario=5",
+							"host": [
+								"{{dominioCurriculify}}"
+							],
+							"path": [
+								"jpa",
+								"criarCurriculo"
+							],
+							"query": [
+								{
+									"key": "idUsuario",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "dominioCurriculify",
+			"value": "localhost:8080",
+			"type": "default"
+		}
+	]
+}

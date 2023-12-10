@@ -14,17 +14,16 @@ public class TesteExpProfissional extends TestCase {
 		String empresa = "UniCuritiba";
 		String cargo = "Professor";
 		ExpProfissional ExpEncontrada = new ExpProfissional();
-		ExpEncontrada.setCdExpProfissional(5);
+		ExpEncontrada.setId(5);
 		ExpEncontrada.setEmpresa("UniCuritiba");
 		ExpEncontrada.setCargo("Professor");
 		ExpEncontrada.setDataInicio(LocalDateTime.now());
 		ExpEncontrada.setDataTermino(LocalDateTime.now());
-		assertEquals(cdExpProfissional, ExpEncontrada.getCdExpProfissional());
+		assertEquals(cdExpProfissional, ExpEncontrada.getId());
 		assertEquals(empresa, ExpEncontrada.getEmpresa());
 		assertEquals(cargo, ExpEncontrada.getCargo());
 		assertEquals(LocalDateTime.now(), ExpEncontrada.getDataInicio());
 		assertEquals(LocalDateTime.now(), ExpEncontrada.getDataTermino());
-		
 	}
 
 }

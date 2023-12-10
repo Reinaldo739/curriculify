@@ -20,12 +20,10 @@ public class TesteUsuario extends TestCase {
 		
 		Usuario UsuarioEncontrado = new Usuario();
 		UsuarioEncontrado.setId(1);
-		UsuarioEncontrado.setLogin("Teste");
 		UsuarioEncontrado.setSenha("SenhaSegura123");
 		UsuarioEncontrado.setEmail("teste@outlook.com");
 		UsuarioEncontrado.setNome("Pedro Carlos Vinicius");
 		assertEquals(1, UsuarioEncontrado.getId());
-		assertEquals("Teste", UsuarioEncontrado.getLogin());
 		assertEquals("SenhaSegura123", UsuarioEncontrado.getSenha());
 		assertEquals("teste@outlook.com", UsuarioEncontrado.getEmail());
 		assertEquals("Pedro Carlos Vinicius", UsuarioEncontrado.getNome());		
